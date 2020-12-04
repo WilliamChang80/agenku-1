@@ -45,23 +45,25 @@ const RegisterPage = () => {
   return(
     <div className={'container'}>
       {(state.errorMessage!='')&&<div className='alert alert-danger'>{state.errorMessage}</div>}
-      <div className="form-group">
-        <label htmlFor="exampleInputEmail1">Email address</label>
-        <input type="email" className="form-control" id="email" aria-describedby="emailHelp"
-               placeholder="Enter email" onChange={handleChange}/>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="exampleInputEmail1">Email address</label>
+          <input type="text" className="form-control" id="email" aria-describedby="emailHelp"
+                 placeholder="Enter email" onChange={handleChange}/>
           <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone
             else.</small>
-      </div>
-      <div className="form-group">
-        <label htmlFor="exampleInputPassword1">Password</label>
-        <input type="password" className="form-control" id="password" onChange={handleChange} placeholder="Password"/>
-      </div>
-      <div className="form-group">
-        <label htmlFor="exampleInputPassword1">Confirm Password</label>
-        <input type="password" className="form-control" id="confirmPassword" onChange={handleChange} placeholder="Confirm Password"/>
-      </div>
+        </div>
+        <div className="form-group">
+          <label htmlFor="exampleInputPassword1">Password</label>
+          <input type="password" className="form-control" id="password" onChange={handleChange} placeholder="Password"/>
+        </div>
+        <div className="form-group">
+          <label htmlFor="exampleInputPassword1">Confirm Password</label>
+          <input type="password" className="form-control" id="confirmPassword" onChange={handleChange} placeholder="Confirm Password"/>
+        </div>
 
-      <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Submit</button>
+        <input type="submit" className="btn btn-primary"/>
+      </form>
     </div>
   )
 }

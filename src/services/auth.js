@@ -30,7 +30,7 @@ export const  login = (credentials) => {
 
 export const register = (credentials) => {
   const promise = new Promise((resolve, reject) => {
-    axios.post(`${API.BASE_URL}/auth/register`, credentials).then(
+    axios.post(`${API.BASE_URL}/auth/register`, credentials,{headers: { Mode: "no-cors" }}).then(
       (res) => {
         setUser(res.data)
         resolve(res.data);
@@ -45,7 +45,7 @@ export const register = (credentials) => {
 
 export  const getAuthHeader= () => {
   return {
-    headers: { Authorization: `Bearer ${this.getUserInfo().access_token}` },
+    headers: { Authorization: `Bearer ${this.getUser().token}`, mode: 'no-cors'},
   };
 }
 
