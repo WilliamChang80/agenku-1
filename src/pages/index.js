@@ -5,6 +5,7 @@ import { handleGet } from "../services/request"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Style from "./home.module.scss"
+import { getAuthHeader } from "../services/auth"
 
 
 const IndexPage = () => {

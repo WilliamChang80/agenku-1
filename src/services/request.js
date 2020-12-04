@@ -4,7 +4,7 @@ import {getAuthHeader} from "./auth"
 
 export const handleGet = (endpoint, isPrivate) => {
   const promise = new Promise((resolve, reject) => {
-    axios.get(`${API.BASE_URL}${endpoint}`,isPrivate?  getAuthHeader() : {headers : {mode: 'no-cors'}}).then(
+    axios.get(`${API.BASE_URL}${endpoint}`,{ headers: isPrivate ? getAuthHeader() : {} }).then(
       (res) => {
         resolve(res.data);
       },
