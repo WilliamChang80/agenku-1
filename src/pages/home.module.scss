@@ -1,0 +1,32 @@
+.search{
+  &-btn{
+    background-color: darkgreen;
+    padding: .5rem;
+  }
+  &-box{
+    border : none;
+    padding: .5rem;
+    width: 400px;
+    &:focus{
+      outline: none;
+      border: none;
+    }
+  }
+}
+
+.category{
+  &-desc{
+    width: 100px;
+    line-height: 20px;
+  }
+
+  &-heading{
+    width: 50px;
+    h2 {
+      span {
+        color: darkgreen;
+      }
+    }
+  }
+
+}

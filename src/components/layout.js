@@ -12,7 +12,7 @@ import Style from './layout.module.scss'
 
 import Header from "./header"
 
-const Layout = ({ children }) => {
+const Layout = ({ children,className }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -27,7 +27,7 @@ const Layout = ({ children }) => {
     <div className={Style}>
       {/*<Header siteTitle={data.site.siteMetadata?.title || `Title`} />*/}
         <div>ini nanti navbar</div>
-        <main>{children}</main>
+        <main className={'container'}>{children}</main>
         <div>ini nanti footer</div>
     </div>
   )
