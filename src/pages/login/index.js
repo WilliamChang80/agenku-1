@@ -1,5 +1,6 @@
-import React, {useState } from "react"
+import React, { useState } from "react"
 import {Link} from "gatsby"
+import {Redirect} from "@reach/router"
 import { isLoggedIn, login } from "../../services/auth"
 import GoogleLogin from "react-google-login"
 import {FacebookLogin} from "react-facebook-login"
@@ -7,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'font-awesome/css/font-awesome.min.css'
 import Image from "../../components/image"
 import Style from './login.module.scss'
+import { navigate } from "../../../.cache/gatsby-browser-entry"
 
 const LoginPage = () =>{
   const [state,setState] = useState({
@@ -22,7 +24,7 @@ const LoginPage = () =>{
     const promise = await login(cred);
     const {message,status} = promise;
     if(status === 200){
-      console.log("nanti redirect login?")
+      navigate('/');
     }else{
       setState(prevState => ({ ...prevState,message : "message gagalnya" }))
     }
@@ -38,7 +40,7 @@ const LoginPage = () =>{
   }
 
   if (isLoggedIn()){
-    return <div>nanti mau buat redirect ini harusnya karna dah login</div>
+    navigate(`/home`);
   }else{
     return (
       <div className={'row no-gutteras'} style={{backgroundColor : '#faebd7', height: '100vh'}}>

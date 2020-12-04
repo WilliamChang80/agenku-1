@@ -28,6 +28,21 @@ export const  login = (credentials) => {
     return promise;
 }
 
+export const register = (credentials) => {
+  const promise = new Promise((resolve, reject) => {
+    axios.post(`${API.BASE_URL}/auth/register`, credentials).then(
+      (res) => {
+        setUser(res.data)
+        resolve(res.data);
+      },
+      (err) => {
+        reject(err);
+      }
+    );
+  });
+  return promise;
+}
+
 export  const getAuthHeader= () => {
   return {
     headers: { Authorization: `Bearer ${this.getUserInfo().access_token}` },

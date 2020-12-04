@@ -1,14 +1,14 @@
 import React, { useState } from "react"
+import { register } from "../services/auth"
+import { navigate } from "../../.cache/gatsby-browser-entry"
 
 const RegisterPage = () => {
   const [state,setState] = useState({
     email : '',
     name : '',
-    phoneNumber : '',
     password : '',
-    location : '',
-    type : '',
     confirmPassword: '',
+    errorMessage: '',
   })
 
   const handleChange = (e) => {
@@ -19,13 +19,32 @@ const RegisterPage = () => {
     }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(state);
+    if (confirmPasswordCheck()){
+      const cred = {email : state.email, password : state.password}
+      const promise = await register(cred);
+      const {message,status} = promise;
+      if(status === 200){
+        navigate('/login');
+      }else{
+        setState(prevState => ({ ...prevState,errorMessage : message}))
+      }
+    }
+    else{
+      setState(prevState => ({...prevState,errorMessage: "Password Not Match"}))
+    }
+  }
+
+  const confirmPasswordCheck = () => {
+    if (state.confirmPassword==state.password) return true;
+    else return false;
   }
 
   return(
     <div className={'container'}>
+      {(state.errorMessage!='')&&<div className='alert alert-danger'>{state.errorMessage}</div>}
       <div className="form-group">
         <label htmlFor="exampleInputEmail1">Email address</label>
         <input type="email" className="form-control" id="email" aria-describedby="emailHelp"
@@ -37,9 +56,9 @@ const RegisterPage = () => {
         <label htmlFor="exampleInputPassword1">Password</label>
         <input type="password" className="form-control" id="password" onChange={handleChange} placeholder="Password"/>
       </div>
-      <div className="form-check my-3">
-        <input type="checkbox" className="form-check-input" id="exampleCheck1"/>
-        <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
+      <div className="form-group">
+        <label htmlFor="exampleInputPassword1">Confirm Password</label>
+        <input type="password" className="form-control" id="confirmPassword" onChange={handleChange} placeholder="Confirm Password"/>
       </div>
 
       <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Submit</button>
