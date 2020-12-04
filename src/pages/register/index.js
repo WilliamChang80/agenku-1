@@ -1,6 +1,6 @@
 import React, { useState } from "react"
-import { register } from "../services/auth"
-import { navigate } from "../../.cache/gatsby-browser-entry"
+import { register } from "../../services/auth"
+import { navigate } from "../../../.cache/gatsby-browser-entry"
 
 const RegisterPage = () => {
   const [state,setState] = useState({
@@ -25,8 +25,8 @@ const RegisterPage = () => {
     if (confirmPasswordCheck()){
       const cred = {email : state.email, password : state.password}
       const promise = await register(cred);
-      const {message,status} = promise;
-      if(status === 200){
+      const {message,code} = promise;
+      if(code === 200){
         navigate('/login');
       }else{
         setState(prevState => ({ ...prevState,errorMessage : message}))
@@ -38,13 +38,13 @@ const RegisterPage = () => {
   }
 
   const confirmPasswordCheck = () => {
-    if (state.confirmPassword==state.password) return true;
+    if (state.confirmPassword === state.password) return true;
     else return false;
   }
 
   return(
     <div className={'container'}>
-      {(state.errorMessage!='')&&<div className='alert alert-danger'>{state.errorMessage}</div>}
+      {(state.errorMessage!=='')&&<div className='alert alert-danger'>{state.errorMessage}</div>}
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="exampleInputEmail1">Email address</label>

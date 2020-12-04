@@ -2,9 +2,9 @@ import axios from "axios"
 import {API} from "../config/api.config"
 import {getAuthHeader} from "./auth"
 
-const hadleGet = (endpoint) => {
+export const handleGet = (endpoint, isPrivate) => {
   const promise = new Promise((resolve, reject) => {
-    axios.get(`${API.BASE_URL}${endpoint}`, getAuthHeader()).then(
+    axios.get(`${API.BASE_URL}${endpoint}`,isPrivate?  getAuthHeader() : {headers : {mode: 'no-cors'}}).then(
       (res) => {
         resolve(res.data);
       },
@@ -16,9 +16,9 @@ const hadleGet = (endpoint) => {
   return promise;
 }
 
-const hadlePost = (endpoint,data) => {
+export const handlePost = (endpoint,data,isPrivate) => {
   const promise = new Promise((resolve, reject) => {
-    axios.post(`${API.BASE_URL}${endpoint}`,data, getAuthHeader()).then(
+    axios.post(`${API.BASE_URL}${endpoint}`,data, isPrivate?  getAuthHeader() : {headers : {mode: 'no-cors'}}).then(
       (res) => {
         resolve(res.data);
       },
@@ -30,9 +30,9 @@ const hadlePost = (endpoint,data) => {
   return promise;
 }
 
-const hadlePut = (endpoint,data) => {
+export const handlePut = (endpoint,data,isPrivate) => {
   const promise = new Promise((resolve, reject) => {
-    axios.put(`${API.BASE_URL}${endpoint}`,data, getAuthHeader()).then(
+    axios.put(`${API.BASE_URL}${endpoint}`,data, isPrivate?  getAuthHeader() : {headers : {mode: 'no-cors'}}).then(
       (res) => {
         resolve(res.data);
       },
@@ -44,9 +44,9 @@ const hadlePut = (endpoint,data) => {
   return promise;
 }
 
-const hadlePatch = (endpoint,data) => {
+export const handlePatch = (endpoint,data, isPrivate) => {
   const promise = new Promise((resolve, reject) => {
-    axios.patch(`${API.BASE_URL}${endpoint}`,data, getAuthHeader()).then(
+    axios.patch(`${API.BASE_URL}${endpoint}`,data, isPrivate?  getAuthHeader() : {headers : {mode: 'no-cors'}}).then(
       (res) => {
         resolve(res.data);
       },
@@ -58,9 +58,9 @@ const hadlePatch = (endpoint,data) => {
   return promise;
 }
 
-const hadleDelete = (endpoint,data) => {
+export const handleDelete = (endpoint,data, isPrivate) => {
   const promise = new Promise((resolve, reject) => {
-    axios.delete(`${API.BASE_URL}${endpoint}`, getAuthHeader()).then(
+    axios.delete(`${API.BASE_URL}${endpoint}`, isPrivate?  getAuthHeader() : {headers : {mode: 'no-cors'}}).then(
       (res) => {
         resolve(res.data);
       },

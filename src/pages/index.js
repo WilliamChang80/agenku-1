@@ -1,29 +1,44 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { Link } from "gatsby"
+import { handleGet } from "../services/request"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import Style from './home.module.scss'
+import Style from "./home.module.scss"
+
 
 const IndexPage = () => {
-  return(
+  const [state,setState] = useState({
+    categories : [],
+  })
+
+  useEffect( () => {
+    async function fetchCategory() {
+      const promise = await handleGet("/service-types",true)
+      const {message, data, status} = promise;
+      const {categories} = data;
+      setState(prevState => ({...prevState, categories}))
+    }
+    fetchCategory()
+  }, [])
+  return (
     <Layout>
       <SEO title="Home" />
-      <div className={'mb-4'}>
+      <div className={"mb-4"}>
         <h1>Agencies</h1>
-        <div className={'d-flex  justify-content-center '}>
-          <div className={'shadow'}>
-            <input className={Style.searchBox}/>
+        <div className={"d-flex  justify-content-center "}>
+          <div className={"shadow"}>
+            <input className={Style.searchBox} />
             <span className={Style.searchBtn}>
-            <i className={'fa fa-search text-white'}></i>
+            <i className={"fa fa-search text-white"}></i>
           </span>
           </div>
         </div>
       </div>
 
       {/*loop*/}
-      <div className={'row'}>
-        <div className={Style.category + ' col-lg-2'}>
+      <div className={"row"}>
+        <div className={Style.category + " col-lg-2"}>
           <div className={Style.categoryHeading}>
             <h2>Software <span>House</span></h2>
           </div>
@@ -31,10 +46,10 @@ const IndexPage = () => {
             <p>An agency for you to make website</p>
           </div>
         </div>
-        <div className={'col-lg-2'}>
+        <div className={"col-lg-2"}>
           kartu
         </div>
-        <div className={'col-lg-2'}>
+        <div className={"col-lg-2"}>
           kartu
         </div>
       </div>
@@ -44,7 +59,6 @@ const IndexPage = () => {
     </Layout>
   )
 }
-
 
 
 export default IndexPage

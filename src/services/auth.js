@@ -44,9 +44,7 @@ export const register = (credentials) => {
 }
 
 export  const getAuthHeader= () => {
-  return {
-    headers: { Authorization: `Bearer ${this.getUser().token}`, mode: 'no-cors'},
-  };
+  return { 'Authorization': `Bearer ${getUser().data.token}`};
 }
 
 export const isLoggedIn = () => {

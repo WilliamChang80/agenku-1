@@ -22,11 +22,11 @@ const LoginPage = () =>{
     e.preventDefault();
     const cred = {email : state.email, password : state.password}
     const promise = await login(cred);
-    const {message,status} = promise;
-    if(status === 200){
+    const {message,code} = promise;
+    if(code === 200){
       navigate('/');
     }else{
-      setState(prevState => ({ ...prevState,message : "message gagalnya" }))
+      setState(prevState => ({ ...prevState,message}))
     }
   }
 
