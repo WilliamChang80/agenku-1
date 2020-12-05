@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import {Link} from "gatsby"
-import {Redirect} from "@reach/router"
 import { isLoggedIn, login } from "../../services/auth"
 import GoogleLogin from "react-google-login"
 import {FacebookLogin} from "react-facebook-login"
@@ -24,12 +23,11 @@ const LoginPage = () =>{
     const promise = await login(cred);
     const {message,code} = promise;
     if(code === 200){
-      navigate('/');
+      navigate('/home');
     }else{
       setState(prevState => ({ ...prevState,message}))
     }
   }
-
 
   const handleChange = (e) => {
     const {id, value} = e.target;
@@ -41,9 +39,10 @@ const LoginPage = () =>{
 
   if (isLoggedIn()){
     navigate(`/home`);
+    return <div></div>
   }else{
     return (
-      <div className={'row no-gutteras'} style={{backgroundColor : '#faebd7', height: '100vh'}}>
+      <div className={'row no-gutters'} style={{backgroundColor : '#faebd7', height: '100vh'}}>
         <div className={'col-lg-6'} style={{backgroundColor: '#008b8b'}}>
           <div className={'position-absolute'} style={{width: '600px', height : '400px', top: '5%',left: '20%'}}>
             <Image/>
@@ -73,7 +72,7 @@ const LoginPage = () =>{
                 <div className={'text-right font-weight-light'} style={{letterSpacing : '1px'}}>
                   <Link to={'/forgot-password'}><sub>Forgot your password?</sub></Link>
                 </div>
-                  <div id={'submit'} onClick={handleSubmit} className={' my-3 d-flex align-items-center justify-content-center'} style={{backgroundColor: '#daa520', height: '50px'}}>
+                  <button type={"submit"} id={'submit'} onClick={handleSubmit} className={' my-3 d-flex align-items-center justify-content-center w-100'} style={{backgroundColor: '#daa520', height: '50px',border : 'none'}}>
                     <div className={'d-flex w-100 justify-content-between align-items-center'}>
                       <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                       <span className={'text-white font-weight-bold'}>Login</span>
@@ -81,7 +80,7 @@ const LoginPage = () =>{
                          <i className={'font-weight-light fa  fa-arrow-right'}></i>
                       </span>
                     </div>
-                  </div>
+                  </button>
               </form>
               <div className={'d-flex align-items-center'}>
                 <hr width={'45%'} className={Style.garis}/>

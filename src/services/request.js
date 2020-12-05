@@ -18,7 +18,7 @@ export const handleGet = (endpoint, isPrivate) => {
 
 export const handlePost = (endpoint,data,isPrivate) => {
   const promise = new Promise((resolve, reject) => {
-    axios.post(`${API.BASE_URL}${endpoint}`,data, isPrivate?  getAuthHeader() : {headers : {mode: 'no-cors'}}).then(
+    axios.post(`${API.BASE_URL}${endpoint}`,data, {headers : isPrivate?  getAuthHeader() : {mode : 'no-cors'}}).then(
       (res) => {
         resolve(res.data);
       },
@@ -32,7 +32,7 @@ export const handlePost = (endpoint,data,isPrivate) => {
 
 export const handlePut = (endpoint,data,isPrivate) => {
   const promise = new Promise((resolve, reject) => {
-    axios.put(`${API.BASE_URL}${endpoint}`,data, isPrivate?  getAuthHeader() : {headers : {mode: 'no-cors'}}).then(
+    axios.put(`${API.BASE_URL}${endpoint}`,data, {headers : isPrivate?  getAuthHeader() : {mode : 'no-cors'}}).then(
       (res) => {
         resolve(res.data);
       },
@@ -46,7 +46,7 @@ export const handlePut = (endpoint,data,isPrivate) => {
 
 export const handlePatch = (endpoint,data, isPrivate) => {
   const promise = new Promise((resolve, reject) => {
-    axios.patch(`${API.BASE_URL}${endpoint}`,data, isPrivate?  getAuthHeader() : {headers : {mode: 'no-cors'}}).then(
+    axios.patch(`${API.BASE_URL}${endpoint}`,data, {headers : isPrivate?  getAuthHeader() : {mode : 'no-cors'}}).then(
       (res) => {
         resolve(res.data);
       },
@@ -60,7 +60,7 @@ export const handlePatch = (endpoint,data, isPrivate) => {
 
 export const handleDelete = (endpoint,data, isPrivate) => {
   const promise = new Promise((resolve, reject) => {
-    axios.delete(`${API.BASE_URL}${endpoint}`, isPrivate?  getAuthHeader() : {headers : {mode: 'no-cors'}}).then(
+    axios.delete(`${API.BASE_URL}${endpoint}`, {headers : isPrivate?  getAuthHeader() : {mode : 'no-cors'}}).then(
       (res) => {
         resolve(res.data);
       },

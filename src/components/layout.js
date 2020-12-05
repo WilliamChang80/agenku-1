@@ -25,10 +25,8 @@ const Layout = ({ children,className }) => {
 
   return (
     <div className={Style}>
-      {/*<Header siteTitle={data.site.siteMetadata?.title || `Title`} />*/}
-        <div>ini nanti navbar</div>
+      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
         <main className={'container'}>{children}</main>
-        <div>ini nanti footer</div>
     </div>
   )
 }

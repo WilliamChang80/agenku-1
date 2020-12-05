@@ -1,9 +1,15 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `Agenku`,
+    description: `Marketplace dimana siapapun dapat mencari jasa dengan mudah`,
+    author: `Tim Tryhard`,
   },
+  proxy : [
+    {
+      prefix: "/api",
+      url: "http://54.179.252.244"
+    }
+  ],
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
@@ -33,6 +39,10 @@ module.exports = {
         implementation: require('sass')
       }
     },
+    {
+      resolve: `gatsby-plugin-create-client-paths`,
+      options: { prefixes: [`/home/*`,'/register/user/*'] },
+    }
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,

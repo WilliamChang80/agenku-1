@@ -1,6 +1,7 @@
 import React, { useState } from "react"
-import { register } from "../../services/auth"
+import { isLoggedIn, register } from "../../services/auth"
 import { navigate } from "../../../.cache/gatsby-browser-entry"
+import Layout from "../../components/layout"
 
 const RegisterPage = () => {
   const [state,setState] = useState({
@@ -21,7 +22,6 @@ const RegisterPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(state);
     if (confirmPasswordCheck()){
       const cred = {email : state.email, password : state.password}
       const promise = await register(cred);
@@ -41,9 +41,16 @@ const RegisterPage = () => {
     if (state.confirmPassword === state.password) return true;
     else return false;
   }
-
+  if (isLoggedIn()){
+    navigate('user/index')
+  }
   return(
-    <div className={'container'}>
+    <Layout>
+      <div className={'mt-3'}>
+        <h1>Hi there!</h1>
+        <p>Before continuing it's better that we get to know you!</p>
+      </div>
+
       {(state.errorMessage!=='')&&<div className='alert alert-danger'>{state.errorMessage}</div>}
       <form onSubmit={handleSubmit}>
         <div className="form-group">
@@ -64,7 +71,7 @@ const RegisterPage = () => {
 
         <input type="submit" className="btn btn-primary"/>
       </form>
-    </div>
+    </Layout>
   )
 }
 

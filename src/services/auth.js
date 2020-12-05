@@ -9,7 +9,7 @@ export const getUser = () =>
     : {}
 
 
-const setUser = user =>
+export const setUser = user =>
   window.localStorage.setItem("userInfo", JSON.stringify(user))
 
 
@@ -49,7 +49,8 @@ export  const getAuthHeader= () => {
 
 export const isLoggedIn = () => {
   const user = getUser()
-  return !!user.email
+
+  return !!user.data
 }
 
 export const logout = () => {
