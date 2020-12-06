@@ -3,7 +3,6 @@ import Layout from "../../components/layout"
 import { getUser } from "../../services/auth"
 import {Link} from "gatsby"
 import { navigate } from "../../../.cache/gatsby-browser-entry"
-import ClientHomePage from "../../components/pages/clientPages/home/clientHome"
 
 const ChooseUserTypePage = () => {
   const {data} = getUser();

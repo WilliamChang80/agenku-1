@@ -2,7 +2,6 @@ import React, { useState } from "react"
 import {Link} from "gatsby"
 import { isLoggedIn, login } from "../../services/auth"
 import GoogleLogin from "react-google-login"
-import {FacebookLogin} from "react-facebook-login"
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'font-awesome/css/font-awesome.min.css'
 import Image from "../../components/image"
@@ -90,9 +89,6 @@ const LoginPage = () =>{
               <div className={'d-flex justify-content-around my-4'}>
                 <div>
                   ini button gogole
-                </div>
-                <div>
-                  ini button facebook
                 </div>
               </div>
               <div className={'text-center'}>

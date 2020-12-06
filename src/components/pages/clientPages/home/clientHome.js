@@ -18,6 +18,7 @@ const ClientHomePage = () => {
       const {data} = promise;
       const {types} = data;
       setState(prevState => ({...prevState, categories : types}))
+
     }
     fetchCategory()
   }, [])
@@ -37,7 +38,7 @@ const ClientHomePage = () => {
         </div>
       </div>
 
-      {/*loop*/}
+      {/*TODO: loop category and services*/}
       {state.categories.map(item => {})}
       <div className={"row"}>
         <div className={`${ Style.category } col-lg-2`}>

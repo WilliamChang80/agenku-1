@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react"
 import Layout from "../../layout"
 import {  setUser,getUser } from "../../../services/auth"
 import { handleGet, handlePost } from "../../../services/request"
-import { API } from '../../../config/api.config'
-import { navigate } from "../../../../.cache/gatsby-browser-entry"
+import { navigate } from "gatsby-link"
 
 const ClientRegistrationPage = () => {
 
@@ -19,7 +18,7 @@ const ClientRegistrationPage = () => {
 
   const getClientTypes =  async () => {
     const promise = await handleGet(`/client-types`,true)
-    const {message,code,data} = promise
+    const {data} = promise
     setState(prevState => ({
       ...prevState,
       allTypes: data.types,

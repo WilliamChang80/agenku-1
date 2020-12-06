@@ -1,8 +1,8 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
-import React, { useState } from "react"
+import React from "react"
 import {isLoggedIn,logout } from "../services/auth"
-import { navigate } from "../../.cache/gatsby-browser-entry"
+import { navigate } from "gatsby-link"
 
 const checkUser = () => {
   if (isLoggedIn()){

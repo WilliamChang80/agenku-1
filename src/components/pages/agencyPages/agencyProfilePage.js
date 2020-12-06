@@ -51,13 +51,8 @@ const AgencyProfilePages = () => {
     console.log(state)
   },[])
 
-  const cekState = () => {
-    console.log(state)
-  }
-
   return (
     <div>
-      <div className={'btn btn-primary'} onClick={cekState}>debug button</div>
       <div className={state.message === "" ? 'd-none' : 'alert alert-danger'}>
         Oops, something went wrong
       </div>

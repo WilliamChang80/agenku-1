@@ -18,6 +18,7 @@ const ClientProfilePage = () => {
     setState(prevState => ({
       ...data
     }))
+    return
   }
 
   useEffect(() => {
