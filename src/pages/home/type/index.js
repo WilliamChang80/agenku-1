@@ -1,11 +1,13 @@
 import React from "react"
+import ClientHomePage from "../../../components/pages/clientPages/home/clientHome"
+import AgencyHomePage from "../../../components/pages/agencyPages/agencyHomePage"
 
-const HomePage = () => {
-  return(
-    <div>
-      ini home page perlu diperbaiki
-    </div>
-  )
+const HomePage = ({location}) => {
+  if (location.state.type === 'client'){
+    return <ClientHomePage/>
+  }else{
+    return <AgencyHomePage/>
+  }
 }
 
 export default HomePage

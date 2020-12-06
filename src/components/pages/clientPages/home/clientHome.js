@@ -9,14 +9,14 @@ import SEO from "../../../seo"
 const ClientHomePage = () => {
   const [state,setState] = useState({
     categories : [],
+    search : ""
   })
 
   useEffect( () => {
     async function fetchCategory() {
       const promise = await handleGet("/service-types",true)
-      const {message, data, status} = promise;
+      const {data} = promise;
       const {types} = data;
-      console.log(data)
       setState(prevState => ({...prevState, categories : types}))
     }
     fetchCategory()
@@ -38,8 +38,9 @@ const ClientHomePage = () => {
       </div>
 
       {/*loop*/}
+      {state.categories.map(item => {})}
       <div className={"row"}>
-        <div className={Style.category + " col-lg-2"}>
+        <div className={`${ Style.category } col-lg-2`}>
           <div className={Style.categoryHeading}>
             <h2>Software <span>House</span></h2>
           </div>
@@ -48,10 +49,10 @@ const ClientHomePage = () => {
           </div>
         </div>
         <div className={"col-lg-2"}>
-          kartu
+          service
         </div>
         <div className={"col-lg-2"}>
-          kartu
+          service
         </div>
       </div>
     </Layout>

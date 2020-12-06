@@ -40,9 +40,13 @@ const Header = ({ siteTitle }) => (
             </Link>
 
           </h1>
-          <div onClick={checkUser}>
-            <div className={isLoggedIn() ? 'btn btn-danger' : 'btn btn-primary'}>{isLoggedIn() ? 'Logout' : 'Login'}</div> <br />
+          <div className={'d-flex justify-content-around align-items-center w-25'}>
+            <div onClick={checkUser}>
+              <div className={isLoggedIn() ? 'btn btn-danger' : 'btn btn-primary'}>{isLoggedIn() ? 'Logout' : 'Login'}</div> <br />
+            </div>
+              {isLoggedIn() && <Link to={'/home/profile'} className={'btn btn-primary'}>Profile</Link>}
           </div>
+
         </div>
       </header>
 

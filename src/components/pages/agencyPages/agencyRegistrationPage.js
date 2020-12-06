@@ -43,7 +43,7 @@ const AgencyRegistrationPage = () => {
     if(!checked){
       setState(prevState => {
         let newClientTypes = prevState.clientTypes.filter(type => {
-          return type.id != value
+          return type.id !== value
         })
         return({
           ...prevState,
@@ -107,7 +107,6 @@ const AgencyRegistrationPage = () => {
               </div>)
             })}
           </div>
-
         </div>
         <button type="submit" onClick={handleSubmit} className="btn btn-primary">Submit</button>
       </form>

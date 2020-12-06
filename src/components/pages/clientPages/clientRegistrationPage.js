@@ -54,12 +54,9 @@ const ClientRegistrationPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log(state)
     const {name,location,type,userId,phoneNumber} = state
     const data = {name,location,type,userId,phoneNumber}
-    console.log(data)
     const promise = await handlePost('/user/client/profile',data,true)
-    console.log(promise)
     const {message,code = 400} = promise
     if (code === 200){
       const authUser = getUser()

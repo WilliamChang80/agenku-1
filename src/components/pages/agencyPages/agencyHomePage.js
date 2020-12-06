@@ -1,10 +1,13 @@
 import React from "react"
+import Layout from "../../layout"
 
 const AgencyHomePage = () => {
   return (
-    <div>
-
-    </div>
+    <Layout>
+      <div>
+        ini agency home page
+      </div>
+    </Layout>
   )
 }
 
