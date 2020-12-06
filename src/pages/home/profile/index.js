@@ -3,7 +3,7 @@ import Layout from "../../../components/layout"
 import { getUser } from "../../../services/auth"
 import ClientProfilePage from "../../../components/pages/clientPages/clientProfilePage"
 import AgencyProfilePages from "../../../components/pages/agencyPages/agencyProfilePage"
-import { navigate } from "../../../../.cache/gatsby-browser-entry"
+import { navigate } from "gatsby"
 
 const ProfilePage = () => {
   const thisUser = getUser()

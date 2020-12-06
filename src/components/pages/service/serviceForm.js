@@ -5,22 +5,19 @@ import { getUser } from "../../../services/auth"
 import { navigate } from "gatsby"
 
 
-const ServiceForm = (props) => {
-
+const ServiceForm = ({serviceData = {}, type,title}) => {
   const [state,setState] = useState({
     dataToSend : {
-      agencyId : props.data.agencyId && '',
-      description : props.data.description && '',
-      name : props.data.name && '',
-      priceEnd : props.data.priceEnd && '',
-      priceStart : props.data.priceStart && '',
-      type : props.data.type && {
-        id : 1
+      agencyId : '',
+      description :  '',
+      name : '',
+      priceEnd :  '',
+      priceStart : '',
+      type :  {
       },
     },
-    handleSubmit : props.handleSubmit,
     message: "",
-    servicesTypes : []
+    servicesTypes : [],
   })
 
   const getServiceTypes = async () => {
@@ -28,7 +25,11 @@ const ServiceForm = (props) => {
     const {data} = promise
     setState(prevState => ({
       ...prevState,
-      servicesTypes : data.types
+      servicesTypes : data.types,
+      dataToSend: {
+        ...prevState.dataToSend,
+        type: data.types[0]
+      }
     }))
   }
 
@@ -45,10 +46,24 @@ const ServiceForm = (props) => {
     }))
   }
 
+  const setOldData = () => {
+   serviceData && setState(prevState => {
+      return ({
+      ...prevState,
+      dataToSend: {
+        ...prevState.dataToSend,
+        ...serviceData
+      }
+    })})
+  }
+
   useEffect(() => {
     getServiceTypes()
     getThisAgencyData()
+    setOldData();
   },[])
+
+
 
   const handleChange = (e) => {
     const {value,id} = e.target
@@ -60,11 +75,13 @@ const ServiceForm = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    console.log(state)
+    console.log(serviceData)
     let promise;
-    if(props.type === 'add'){
+    if(type === 'add'){
       promise = await handlePost('/service',state.dataToSend,true)
     }else{
-      promise = await handlePost(`/service/${props.data.id}`,state.dataToSend,true)
+      promise = await handlePost(`/service/${serviceData.id}`,state.dataToSend,true)
     }
     const {code, message, data} = promise
     if (code === 200){
@@ -91,7 +108,7 @@ const ServiceForm = (props) => {
 
   return (
     <Layout>
-      <h1 className={'mb-3'}>Register your service here</h1>
+      <h1 className={'mb-3'}>{title}</h1>
       <div className={state.message === '' ? 'd-none' : 'alert alert-danger'}>
         {state.message}
       </div>
@@ -109,7 +126,7 @@ const ServiceForm = (props) => {
         <div className={'d-flex align-items-center'}>
           <label htmlFor={'type'}>Choose service type : </label>
           <div>
-            <select id={'type'} className={'form-control mx-3'} onChange={handleChangeSelect}>
+            <select id={'type'} className={'form-control mx-3'} value={state.dataToSend.type} onChange={handleChangeSelect}>
               {state.servicesTypes.map((type) => {
                 return <option key={type.id} value={type.id} >{type.name}</option>
               })}

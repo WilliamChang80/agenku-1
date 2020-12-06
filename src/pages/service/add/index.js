@@ -1,11 +1,10 @@
 import React from "react"
 import ServiceForm from "../../../components/pages/service/serviceForm"
-import { handlePost } from "../../../services/request"
 
 
 const RegisServicePage = () => {
   const type = 'add'
-  return (<ServiceForm type={type} />)
+  return (<ServiceForm type={type} title={'Register your service here'} />)
 }
 
 export default RegisServicePage

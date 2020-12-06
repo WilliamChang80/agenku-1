@@ -1,5 +1,7 @@
 import axios from "axios"
 import {API} from "../config/api.config"
+import { handleGet } from "./request"
+import { navigate } from "../../.cache/gatsby-browser-entry"
 
 export const isBrowser = () => typeof window !== "undefined"
 
@@ -44,13 +46,22 @@ export const register = (credentials) => {
 }
 
 export  const getAuthHeader= () => {
+  // checkToken
   return { 'Authorization': `Bearer ${getUser().data.token}`};
 }
 
-export const isLoggedIn = () => {
+export const isLoggedIn =  () => {
   const user = getUser()
-
+  // await checkToken()
   return !!user.data
+}
+
+export const checkToken = async () => {
+    const promise = await handleGet('/user/check',true)
+    const {code} = promise
+    if(code !== 200){
+      await navigate('/login')
+    }
 }
 
 export const logout = () => {

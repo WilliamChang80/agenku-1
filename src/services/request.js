@@ -58,7 +58,7 @@ export const handlePatch = (endpoint,data, isPrivate) => {
   return promise;
 }
 
-export const handleDelete = (endpoint,data, isPrivate) => {
+export const handleDelete = (endpoint, isPrivate) => {
   const promise = new Promise((resolve, reject) => {
     axios.delete(`${API.BASE_URL}${endpoint}`, {headers : isPrivate?  getAuthHeader() : {mode : 'no-cors'}}).then(
       (res) => {
