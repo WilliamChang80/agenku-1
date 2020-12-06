@@ -48,7 +48,7 @@ const RegisterPage = () => {
     <Layout>
       <div className={'mt-3'}>
         <h1>Hi there!</h1>
-        <p>Before continuing it's better that we get to know you!</p>
+        <p>New here? Let's register first :)</p>
       </div>
 
       {(state.errorMessage!=='')&&<div className='alert alert-danger'>{state.errorMessage}</div>}

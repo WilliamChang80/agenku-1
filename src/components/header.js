@@ -30,7 +30,7 @@ const Header = ({ siteTitle }) => (
         >
           <h1 style={{ margin: 0 }}>
             <Link
-              to="/"
+              to="/home"
               style={{
                 color: `white`,
                 textDecoration: `none`,
@@ -41,10 +41,11 @@ const Header = ({ siteTitle }) => (
 
           </h1>
           <div className={'d-flex justify-content-around align-items-center w-25'}>
+            <Link to={'/home'} className={'text-white'}>Home</Link>
+            {isLoggedIn() && <Link to={'/home/profile'} className={'btn btn-primary'}>Profile</Link>}
             <div onClick={checkUser}>
               <div className={isLoggedIn() ? 'btn btn-danger' : 'btn btn-primary'}>{isLoggedIn() ? 'Logout' : 'Login'}</div> <br />
             </div>
-              {isLoggedIn() && <Link to={'/home/profile'} className={'btn btn-primary'}>Profile</Link>}
           </div>
 
         </div>
