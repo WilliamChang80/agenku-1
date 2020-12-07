@@ -33,6 +33,7 @@ const ChooseUserTypePage = () => {
           }
           className={"shadow-lg p-5 text-dark"}
           style={{ borderRadius: "2rem" }}
+          state={{ type: "client" }}
         >
           <img
             className="home-image"
@@ -55,6 +56,7 @@ const ChooseUserTypePage = () => {
               ? "/home/type/agency"
               : "/register/user/agency"
           }
+          state={{ type: "agency" }}
           className={"shadow-lg p-5 text-dark"}
           style={{ borderRadius: "2rem" }}
         >
