@@ -14,19 +14,6 @@ const ChooseUserTypePage = () => {
   }
   return (
     <Layout>
-<<<<<<< HEAD
-      <div className={'d-flex justify-content-around align-items-center'} style={{height : "70vh"}}>
-
-        <Link to={data.user.roles.indexOf('CLIENT') !== -1 ? '/home/type/client' : '/register/user/client'} state={{type: "client"}} className={'shadow-lg p-5 text-dark'}>
-          <h1 className={'text-center'}>Customer</h1>
-          <p>{data.user.roles.indexOf('CLIENT') !== -1 ? 'Checkout your user home' :'By clicking this you are registering yourself as customer'}</p>
-||||||| merged common ancestors
-      <div className={'d-flex justify-content-around align-items-center'} style={{height : "70vh"}}>
-
-        <Link to={data.user.roles.indexOf('CLIENT') !== -1 ? '/home/type/client' : '/register/user/client'}  className={'shadow-lg p-5 text-dark'}>
-          <h1 className={'text-center'}>Customer</h1>
-          <p>{data.user.roles.indexOf('CLIENT') !== -1 ? 'Checkout your user home' :'By clicking this you are registering yourself as customer'}</p>
-=======
       <div
         className={"d-flex justify-content-around align-items-center"}
         style={{ fontSize: "4rem", color: "#5a10c9" }}
@@ -60,17 +47,7 @@ const ChooseUserTypePage = () => {
               ? "Checkout your user home"
               : "By clicking this you are registering yourself as customer"}
           </p>
->>>>>>> d0add86241e4fb2db39c15b75cf77b77fcddda71
         </Link>
-<<<<<<< HEAD
-        <Link to={data.user.roles.indexOf('AGENCIES') !== -1 ? '/home/type/agency' : '/register/user/agency'} state={{type: "agency"}} className={'shadow-lg p-5 text-dark'}>
-          <h1 className={'text-center'}>Agency</h1>
-          <p>{data.user.roles.indexOf('AGENCIES') !== -1 ? "Checkout your agency home" : 'By clicking this you are registering yourself as agency'}</p>
-||||||| merged common ancestors
-        <Link to={data.user.roles.indexOf('AGENCIES') !== -1 ? '/home/type/agency' : '/register/user/agency'} className={'shadow-lg p-5 text-dark'}>
-          <h1 className={'text-center'}>Agency</h1>
-          <p>{data.user.roles.indexOf('AGENCIES') !== -1 ? "Checkout your agency home" : 'By clicking this you are registering yourself as agency'}</p>
-=======
         <Link
           className="link"
           to={
@@ -94,7 +71,6 @@ const ChooseUserTypePage = () => {
               ? "Checkout your agency home"
               : "By clicking this you are registering yourself as agency"}
           </p>
->>>>>>> d0add86241e4fb2db39c15b75cf77b77fcddda71
         </Link>
       </div>
     </Layout>
