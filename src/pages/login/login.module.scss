@@ -1,9 +1,30 @@
-.garis{
+.garis {
   height: 2px;
   background-color: #d4d4d4;
 }
 
-.input{
-  padding : .5rem;
-  border : none;
+.input {
+  padding: 0.5rem;
+  border: none;
+}
+
+input[name="email"],
+input[type="password"],
+input[type="text"] {
+  border-bottom: 2px solid black;
+  &:focus {
+    outline: none;
+  }
+}
+
+button[type="submit"] {
+  border-radius: 1rem;
+  font-size: 1rem;
+}
+.toggle-password {
+  color: black;
+  font-size: 2rem;
+  margin-top: 11px;
+  margin-left: 10px;
+  position: absolute;
 }
