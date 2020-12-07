@@ -2,18 +2,16 @@ import React, { useEffect, useState } from "react"
 import { handleGet } from "../../../services/request"
 import { getUser } from "../../../services/auth"
 
-const ClientProfilePage = () => {
+const ClientProfilePage = ({id,author}) => {
   const [state,setState] = useState({
-    id : '',
     name : '',
     location : '',
     phoneNumber : '',
     clientType : []
   })
-  const thisUser = getUser()
 
   const getClientData = async () => {
-    const promise = await handleGet(`/user/${thisUser.data.user.id}/client`,true)
+    const promise = await handleGet(`/user/${id}/client`,true)
     const {data} = promise
     setState(prevState => ({
       ...data
