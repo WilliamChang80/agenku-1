@@ -2,13 +2,16 @@ import React, { useEffect, useState } from "react"
 import { handleGet } from "../../services/request"
 import Layout from "../../components/layout"
 
-const ServicePage = ({serviceId}) => {
-  const [state,setState] = useState({})
+const ServicePage = ({location}) => {
+  const [state,setState] = useState({
+    service: {}
+  })
 
   const getServiceData = async () => {
-    const promise = await handleGet('/',true)
+    const promise = await handleGet(`/service/${location.state.id}`,true)
     const {data} = promise
-    setState(...data)
+    console.log(data)
+    setState(prevState => ({...prevState, service: data}))
   }
 
   useEffect(() => {
@@ -18,7 +21,16 @@ const ServicePage = ({serviceId}) => {
 
   return(
     <Layout>
-      ini service detail page
+      <div className="card">
+        <div className="card-header">
+          Service Details
+        </div>
+        <div className="card-body">
+          <h5 className="card-title">Special title treatment</h5>
+          <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <a href="#" className="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
     </Layout>
   )
 }

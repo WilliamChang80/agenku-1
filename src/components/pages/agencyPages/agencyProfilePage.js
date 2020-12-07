@@ -9,8 +9,25 @@ const AgencyProfilePages = ({id,author}) => {
     rerender : false,
   })
 
-  const getMyServices = async () => {
-    const promise = await handleGet('/services/agency/' + state.thisAgencyData.id,true)
+  const getThisAgencyProfile = async () => {
+    const promise = await handleGet(`/user/${id}/agency`,true)
+    const {data,code,message} = promise
+    if (code === 200){
+      setState(prevState => ({
+        ...prevState,
+         thisAgencyData: {...prevState.thisAgencyData,...data}
+      }))
+      getMyServices(data.id)
+    }else{
+      setState(prevState => ({
+        ...prevState,
+        message
+      }))
+    }
+  }
+
+  const getMyServices = async (id) => {
+    const promise = await handleGet('/services/agency/' + id,true)
     const {data,code,message} = promise
     if (code === 200){
       setState(prevState => ({
@@ -24,32 +41,15 @@ const AgencyProfilePages = ({id,author}) => {
       }))
     }
     console.log(state)
-
-  }
-
-  const getThisAgencyProfile = async () => {
-    const promise = await handleGet(`/user/${id}/agency`,true)
-    const {data,code,message} = promise
-    if (code === 200){
-      setState(prevState => ({
-        ...prevState,
-         thisAgencyData: {...prevState.thisAgencyData,...data}
-      }))
-    }else{
-      setState(prevState => ({
-        ...prevState,
-        message
-      }))
-    }
   }
 
   useEffect(() => {
     getThisAgencyProfile()
   },[])
 
-  useEffect(() => {
-    getMyServices()
-  },[state.thisAgencyData.id])
+  // useEffect(() => {
+  //   getMyServices()
+  // },[state.thisAgencyData.id])
 
   const clickDelete = async (e) => {
     const {value} = e.target
@@ -71,8 +71,8 @@ const AgencyProfilePages = ({id,author}) => {
         return <div key={key} className={'my-3'}>Agency {key} : {value}</div>
       })}
 
-      {author &&  <div>
-        <h2>My services : </h2>
+      {<div>
+        <h2>{author && "My"} Services : </h2>
         {state.thisAgencyData.services.length === 0 ?
           <span>You have 0 services :( </span>
           :
@@ -87,20 +87,26 @@ const AgencyProfilePages = ({id,author}) => {
                       <div className={'my-3'}>service {key} : {typeof (isi) === 'object' ? isi.name : isi}</div>
                     </div>)
                   })}
-
+                  {author ?
                   <div key={item.id} className={'d-flex justify-content-around'}>
                     <Link className={'btn btn-primary'} to={`/service/update`} state={item}> Update </Link>
                     <button className={'btn btn-danger'} onClick={clickDelete} type={"button"} value={item.id}>Delete</button>
-                  </div>
+                  </div> :
+                    <div>
+                      <Link className={'btn btn-primary'} state={{ id: item.id }} to={"/service"}> See More </Link>
+                    </div>
+                  }
                 </div>)
               })}
             </div>
           </div>
         }
+        {author &&
         <div className={'d-flex flex-column my-3'}>
           <span className={'my-3'}>Want to add your service?</span>
           <Link to={'/service/add'} className={'mb-5'}>Click Here!</Link>
         </div>
+        }
       </div>}
 
     </div>

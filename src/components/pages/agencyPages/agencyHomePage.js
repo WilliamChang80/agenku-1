@@ -1,15 +1,22 @@
 import React, { useEffect, useState } from "react"
 import Layout from "../../layout"
-import { handleGet } from "../../../services/request"
+import { handleGet, handlePost } from "../../../services/request"
 import { getUser } from "../../../services/auth"
+import Loader from "../../loader"
+import AgencyHomeCard from "./agencyHomeCard"
 
 
 
 const AgencyHomePage = () => {
   const [state,setState] = useState({
     thisAgencyData : {id : ""},
-    transactions : []
+    transactions : [],
   })
+  const [success,setSuccess] = useState("")
+
+  const handleConfirmSuccess = () => {
+    setSuccess("Order Has Been Confirmed")
+  }
 
   const getAgencyData  = async () => {
     const thisUser = getUser()
@@ -17,16 +24,17 @@ const AgencyHomePage = () => {
     const {data} = promise
     setState(prevState => ({
       ...prevState,
-      thisAgencyData: {...prevState.thisAgencyData,...data}
+      thisAgencyData: {...data}
     }))
+     getAllRelatedTransaction(data.id)
   }
 
-  const getAllRelatedTransaction = async () => {
-    const promise = await handleGet(`/transaction/agency/${state.thisAgencyData.id}`,true)
+  const getAllRelatedTransaction = async (id) => {
+    const promise = await handleGet(`/transaction/agency/${id}`,true)
     const {data} = promise
     setState(prevState => ({
       ...prevState,
-      transactions: [...prevState.transactions,...data]
+      transactions: [...data]
     }))
   }
 
@@ -34,15 +42,19 @@ const AgencyHomePage = () => {
     getAgencyData()
   },[])
 
-  useEffect(() => {
-    getAllRelatedTransaction()
-  },[state.thisAgencyData.id])
-
+  const CONFIRM_CHECK = "Waiting confirmation";
   return (
     <Layout>
       <h1>This page will show all transactions</h1>
-      <div>
-        blm dibuat sih ado
+      {success &&
+      <div className="alert alert-success" role="alert">
+        {success}
+      </div>
+      }
+      <div className={'d-flex flex-wrap justify-content-around'}>
+        {state.transactions.map((item)=>
+          <AgencyHomeCard item={item} handleConfirmSuccess={handleConfirmSuccess} />
+        )}
       </div>
     </Layout>
   )
