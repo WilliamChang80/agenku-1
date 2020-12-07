@@ -53,7 +53,7 @@ const AgencyHomePage = () => {
         </div>
       )}
       <div className={"d-flex flex-wrap justify-content-around"}>
-        {state.transactions.map(item => (
+        {state?.transactions.map(item => (
           <AgencyHomeCard
             item={item}
             handleConfirmSuccess={handleConfirmSuccess}

@@ -86,8 +86,10 @@ const AgencyRegistrationPage = () => {
         <h1 className={"text-capitalize"}>
           To become an Agency please fill the following information
         </h1>
-        <div className={state.message === "" ? "d-none" : "alert alert-danger"}>
-          {state.message}
+        <div
+          className={state?.message === "" ? "d-none" : "alert alert-danger"}
+        >
+          {state?.message}
         </div>
       </div>
       <form>
