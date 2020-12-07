@@ -10,7 +10,7 @@ const AgencyProfilePages = ({id,author}) => {
   })
 
   const getThisAgencyProfile = async () => {
-    const promise = await handleGet(`/user/${id}/agency`,true)
+    const promise = await handleGet(`/agency/${id}/`,true)
     const {data,code,message} = promise
     if (code === 200){
       setState(prevState => ({

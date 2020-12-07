@@ -10,7 +10,7 @@ const AgencyHomeCard = ({item, handleConfirmSuccess}) => {
 
   const handleTransactionConfirm = async (id) => {
     setLoading(id);
-    const promise = await handlePost(`/transaction/${id}/confirm`,{},true);
+    const promise = await handlePost(`/transaction/${id}/confirm`,{term},true);
     const {code, message} = promise;
     if (code === 200){
       setLoading(null);
@@ -22,7 +22,7 @@ const AgencyHomeCard = ({item, handleConfirmSuccess}) => {
     const {value,id} = e.target
     setTerm(prevState => ({
       ...prevState,
-      term: e.target.value
+      term: value
     }))
   }
 
@@ -41,10 +41,10 @@ const AgencyHomeCard = ({item, handleConfirmSuccess}) => {
                 <hr/>
                 <div className="form-group mt-3">
                   <label htmlFor="exampleInputEmail1">Terms and Condition</label>
-                  <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+                  <input type="email" className="form-control" id="termInput" onChange={handleChange}/>
                     <small id="emailHelp" className="form-text text-muted">You must enter your terms on doing this job for your client.</small>
                 </div>
-                <button className={'btn btn-primary'} onChange={handleChange} onClick={() => handleTransactionConfirm(item.id)}>Confirm</button>
+                <button className={'btn btn-primary'} onClick={() => handleTransactionConfirm(item.id)}>Confirm</button>
               </div>:
               <Loader bootstrapColor={"primary"}/>)
           }
