@@ -62,7 +62,7 @@ const AgencyRegistrationPage = () => {
     e.preventDefault()
     const {clientTypes,description,phoneNumber,name,rating,userId} = state
     const data = {clientTypes,description,phoneNumber,name,rating,userId}
-    const promise = await handlePost('/user/agency/my-profile',data,true)
+    const promise = await handlePost('/user/agency/profile',data,true)
     const {message,code} = promise
     if (code === 200){
       const authUser = getUser()

@@ -55,7 +55,7 @@ const ClientRegistrationPage = () => {
     e.preventDefault()
     const {name,location,type,userId,phoneNumber} = state
     const data = {name,location,type,userId,phoneNumber}
-    const promise = await handlePost('/user/client/my-profile',data,true)
+    const promise = await handlePost('/user/client/profile',data,true)
     const {message,code = 400} = promise
     if (code === 200){
       const authUser = getUser()
