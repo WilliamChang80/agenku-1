@@ -27,7 +27,7 @@ const RegisterPage = () => {
       const promise = await register(cred)
       const { message, code } = promise
       if (code === 200) {
-        navigate("/login")
+        typeof window !== "undefined" && navigate("/login")
       } else {
         setState(prevState => ({ ...prevState, errorMessage: message }))
       }
@@ -44,7 +44,7 @@ const RegisterPage = () => {
     else return false
   }
   if (isLoggedIn()) {
-    navigate("user/index")
+    typeof window !== "undefined" && navigate("user/index")
   }
   return (
     <Layout className="register-page">

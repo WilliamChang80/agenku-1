@@ -27,7 +27,7 @@ const LoginPage = () => {
     const promise = await login(cred)
     const { message, code } = promise
     if (code === 200) {
-      navigate("/home")
+      typeof window !== "undefined" && navigate("/home")
     } else {
       setState(prevState => ({ ...prevState, message }))
     }
@@ -42,7 +42,7 @@ const LoginPage = () => {
   }
 
   if (isLoggedIn()) {
-    navigate(`/home`)
+    typeof window !== "undefined" && navigate(`/home`)
     return <div></div>
   } else {
     return (

@@ -74,7 +74,7 @@ const AgencyRegistrationPage = () => {
       const authUser = getUser()
       authUser.data.user.roles.push("AGENCIES")
       setUser(authUser)
-      navigate("/home")
+      typeof window !== "undefined" && navigate("/home")
     } else {
       setState(prevState => ({ message }))
     }
