@@ -10,7 +10,12 @@ const AgencyProfilePages = ({id,author}) => {
   })
 
   const getThisAgencyProfile = async () => {
-    const promise = await handleGet(`/agency/${id}/`,true)
+    let promise
+    if (author){
+      promise = await  handleGet(`/user/${id}/agency`,true)
+    }else{
+      promise = await handleGet(`/agency/${id}/`,true)
+    }
     const {data,code,message} = promise
     if (code === 200){
       setState(prevState => ({
@@ -65,7 +70,7 @@ const AgencyProfilePages = ({id,author}) => {
       <div className={state.message === "" ? 'd-none' : 'alert alert-danger'}>
         Oops, something went wrong : {state.message}
       </div>
-      <h1>My profile as an agency</h1>
+      <h1>{author && ''} Profile as an agency</h1>
       {Object.entries(state.thisAgencyData).map(([key,value]) => {
         if(key === 'id' || key === 'services') return
         return <div key={key} className={'my-3'}>Agency {key} : {value}</div>
@@ -74,7 +79,7 @@ const AgencyProfilePages = ({id,author}) => {
       {<div>
         <h2>{author && "My"} Services : </h2>
         {state.thisAgencyData.services.length === 0 ?
-          <span>You have 0 services :( </span>
+          <span>{author ? `You` : `This agency`} have 0 services :( </span>
           :
           <div>
             <span>You have {state.thisAgencyData.services.length} services</span>
@@ -98,13 +103,19 @@ const AgencyProfilePages = ({id,author}) => {
                   }
                 </div>)
               })}
+
             </div>
           </div>
         }
         {author &&
-        <div className={'d-flex flex-column my-3'}>
-          <span className={'my-3'}>Want to add your service?</span>
-          <Link to={'/service/add'} className={'mb-5'}>Click Here!</Link>
+        <div className={' pb-5 align-items-center d-flex'}>
+          <div className={'d-flex flex-column'}>
+            <span className={'my-3'}>Want to add your service?</span>
+            <Link to={'/service/add'}>Click Here!</Link>
+          </div>
+          <div className={'mx-3'}>
+            <Link to={'/agency/chat'} className={'btn btn-primary'} state={{thisAgencyId : state.thisAgencyData.id}}>ini chat untuk liat chat</Link>
+          </div>
         </div>
         }
       </div>}

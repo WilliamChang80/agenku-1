@@ -6,18 +6,20 @@ import "react-chatbox-component/dist/style.css"
 import Image1 from "../../../images/profile1.jpg"
 import Image3 from "../../../images/profile3.jpg"
 
-const AgencyChatPage = () => {
+const AgencyChatPage = ({choosenAgencyId}) => {
+
   const [chats, setChats] = useState([])
   const [messages, setMessages] = useState([])
   const [title, setTitle] = useState()
   const [type, setType] = useState("")
   const [id, setId] = useState()
 
-  const getChatData = async () => {
-    const promise = await handleGet(`/chat/agency/4`, true)
+  const getChatData = async (selectedAgencyId) => {
+    const promise = await handleGet(`/chat/agency/${selectedAgencyId}`, true)
     const { data } = promise
     await setChats(data)
-    data.map(c => getMessageData(c.id))
+    getMessageData(selectedAgencyId)
+    console.log(data)
   }
 
   const handleChange = e => {
@@ -26,8 +28,9 @@ const AgencyChatPage = () => {
   }
 
   useEffect(() => {
-    getChatData()
+    getChatData(choosenAgencyId)
   }, [])
+
   const getMessageData = async id => {
     const promise = await handleGet(`/chat/${id}`, true)
     setId(id)
@@ -66,11 +69,12 @@ const AgencyChatPage = () => {
           </h5>
         </div>
         <form>
-          <input
-            type={"text"}
-            placeholder={"Enter your message"}
-            onChange={handleChange}
-          />
+          {/*<input*/}
+          {/*  type={"text"}*/}
+          {/*  placeholder={"Enter your message"}*/}
+          {/*  onChange={handleChange}*/}
+          {/*/>*/}
+          <Chat onSubmit={handleChange}  messages={messages} />
           <button
             type={"submit"}
             id={"submit"}
@@ -82,7 +86,6 @@ const AgencyChatPage = () => {
             Send
           </button>
         </form>
-        <Chat messages={messages} />
       </div>
     </Layout>
   )
