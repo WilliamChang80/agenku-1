@@ -9,7 +9,7 @@ const checkUser = () => {
   if (isLoggedIn()) {
     logout()
   }
-  navigate("/login")
+  typeof window !== "undefined" && navigate("/login")
 }
 
 const Header = ({ siteTitle }) => {

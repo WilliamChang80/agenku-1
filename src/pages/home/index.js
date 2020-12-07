@@ -9,7 +9,7 @@ import ClientImage from "../../images/client.jpg"
 const ChooseUserTypePage = () => {
   const { data } = getUser()
   if (!data) {
-    navigate("/login")
+    typeof window !== "undefined" && navigate("/login")
     return <div></div>
   }
   return (
