@@ -85,7 +85,7 @@ const ServiceForm = ({serviceData = {}, type,title}) => {
     }
     const {code, message, data} = promise
     if (code === 200){
-      await navigate('/home/profile')
+      await navigate('/home/my-profile')
     }else{
       data.message = message
     }

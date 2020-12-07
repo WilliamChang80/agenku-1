@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react"
 import { handleDelete, handleGet } from "../../../services/request"
 import { Link } from "gatsby"
-import { getUser } from "../../../services/auth"
+const AgencyProfilePages = ({id,author}) => {
 
-const AgencyProfilePages = () => {
-  const thisUser = getUser()
   const [state,setState] = useState({
-    thisAgencyData : {id : "",services : []},
+    thisAgencyData : {services : []},
     message : "",
     rerender : false,
   })
@@ -25,11 +23,12 @@ const AgencyProfilePages = () => {
         message
       }))
     }
+    console.log(state)
 
   }
 
   const getThisAgencyProfile = async () => {
-    const promise = await handleGet(`/user/${thisUser.data.user.id}/agency`,true)
+    const promise = await handleGet(`/user/${id}/agency`,true)
     const {data,code,message} = promise
     if (code === 200){
       setState(prevState => ({
@@ -71,10 +70,11 @@ const AgencyProfilePages = () => {
         if(key === 'id' || key === 'services') return
         return <div key={key} className={'my-3'}>Agency {key} : {value}</div>
       })}
-      <div>
+
+      {author &&  <div>
         <h2>My services : </h2>
         {state.thisAgencyData.services.length === 0 ?
-            <span>You have 0 services :( </span>
+          <span>You have 0 services :( </span>
           :
           <div>
             <span>You have {state.thisAgencyData.services.length} services</span>
@@ -87,6 +87,7 @@ const AgencyProfilePages = () => {
                       <div className={'my-3'}>service {key} : {typeof (isi) === 'object' ? isi.name : isi}</div>
                     </div>)
                   })}
+
                   <div key={item.id} className={'d-flex justify-content-around'}>
                     <Link className={'btn btn-primary'} to={`/service/update`} state={item}> Update </Link>
                     <button className={'btn btn-danger'} onClick={clickDelete} type={"button"} value={item.id}>Delete</button>
@@ -100,8 +101,8 @@ const AgencyProfilePages = () => {
           <span className={'my-3'}>Want to add your service?</span>
           <Link to={'/service/add'} className={'mb-5'}>Click Here!</Link>
         </div>
+      </div>}
 
-      </div>
     </div>
   )
 }

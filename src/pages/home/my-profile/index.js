@@ -12,8 +12,8 @@ const ProfilePage = () => {
   }
   return(
     <Layout>
-      {thisUser.data.user.roles.indexOf('CLIENT') !== -1 && <ClientProfilePage/>}
-      {thisUser.data.user.roles.indexOf('AGENCIES') !== -1 && <AgencyProfilePages/>}
+      {thisUser.data.user.roles.indexOf('CLIENT') !== -1 && <ClientProfilePage id={thisUser.data.user.id}/>}
+      {thisUser.data.user.roles.indexOf('AGENCIES') !== -1 && <AgencyProfilePages id={thisUser.data.user.id} author={true}/>}
     </Layout>
   )
 }
