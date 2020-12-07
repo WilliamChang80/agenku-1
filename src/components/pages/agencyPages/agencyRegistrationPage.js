@@ -99,7 +99,7 @@ const AgencyRegistrationPage = () => {
             onChange={handleChange}
             id="name"
             value={state.name}
-            placeholder="P.T. Agenku Indonesia"
+            placeholder="Enter Company Name"
           />
         </div>
         <div className="form-group">
@@ -110,7 +110,7 @@ const AgencyRegistrationPage = () => {
             onChange={handleChange}
             id="phoneNumber"
             value={state.phoneNumber}
-            placeholder="08123456789"
+            placeholder="Enter Phone Number"
           />
         </div>
         <div className="form-group">
@@ -118,7 +118,7 @@ const AgencyRegistrationPage = () => {
           <textarea
             className={"form-control"}
             value={state.description}
-            placeholder={"perusahaan yang bertujuan untuk membantu masyarakat"}
+            placeholder={"Enter Agency Description"}
             onChange={handleChange}
             id={"description"}
           ></textarea>
